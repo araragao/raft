@@ -291,11 +291,17 @@ The values were taken from various amounts of servers (3, 5 and 7) and for 6 dif
 
 The latency measures the time interval between the leader receiving a command from the client and the instant in which the client sends the response to that command.
 
-<img align="center" src="pictures/graphics/latency-3.png" alt="latency-3">
+<p align="center">
+  <img src="pictures/graphics/latency-3.png" alt="latency-3">
+</p>
 
-<img align="center" src="pictures/graphics/latency-5.png" alt="latency-5">
+<p align="center">
+  <img src="pictures/graphics/latency-5.png" alt="latency-5">
+</p>
 
-<img align="center" src="pictures/graphics/latency-7.png" alt="latency-7">
+<p align="center">
+  <img src="pictures/graphics/latency-7.png" alt="latency-7">
+</p>
 
 When evaluating the results, it is clear that the latency increases with the percentage of error and number of servers.
 
