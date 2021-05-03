@@ -17,7 +17,7 @@
       <ul>
         <li><a href="#leader-election">Leader Election</a></li>
         <li><a href="#log-replication">Log Replication</a></li>
-        <li><a href="#update-state-machine">State Machine Updates</a></li>
+        <li><a href="#state-machine">State Machine</a></li>
       </ul>
     <li><a href="#implementation">Implementation</a></li>
       <ul>
@@ -31,17 +31,11 @@
             </ul>
         <li><a href="#interface">Interface</a></li>
       </ul>
-    <li><a href="#results">Results</a></li>
+    <li><a href="#results">Results and Performance Analysis</a></li>
       <ul>
-        <li><a href="#latency-results">Latency</a></li>
-        <li><a href="#election-time-results">Election Time</a></li>
-        <li><a href="#convergence-time-results">Convergence Time</a></li>
-      </ul>
-    <li><a href="#performance-analysis">Performance Analysis</a></li>
-      <ul>
-        <li><a href="#latency-analysis">Latency</a></li>
-        <li><a href="#election-time-analysis">Election Time</a></li>
-        <li><a href="#convergence-time-analysis">Convergence Time</a></li>
+        <li><a href="#latency">Latency</a></li>
+        <li><a href="#election-time">Election Time</a></li>
+        <li><a href="#convergence-time">Convergence Time</a></li>
       </ul>
     <li><a href="#general-review">General Review</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -52,6 +46,40 @@
 
 This project aims to explain what RAFT is about, describe a possible implementation using Java, provide real data regarding the usage of 3, 5 and 7 servers and discuss its performance corcerning the obtained results.
 Furthermore, the implementation's source code is also available.
+
+## RAFT Overview
+
+### Leader Election
+
+### Log Replication
+
+### State Machine
+
+## Implementation
+
+### Client
+
+### State Machine Loop
+
+### State Machine Updates
+
+#### Leader
+
+#### Candidate
+
+#### Follower
+
+### Interface
+
+## Results and Analysis
+
+### Latency
+
+### Election Time
+
+### Convergence Time
+
+## General Review
 
 ## Contact
 
