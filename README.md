@@ -253,28 +253,47 @@ Having the same goal in mind, it also has a button to check the command list.
 
 ## Results and Performance Analysis
 
+The values were taken from various amounts of servers (3, 5 and 7) and for 6 different values of percentages of error, where error means percentage of lost messages.
+
 ### Latency
 
-The latency measures the time interval between the leader receiving a command from the client and the instant in which the client sends the response to that command. Figures 10, 11 and 12 show the results.
+The latency measures the time interval between the leader receiving a command from the client and the instant in which the client sends the response to that command.
 
-With regards to the latency, the values were taken from various amounts of servers (3, 5 or 7) and for 6 different values of percentages of error, where error means percentage of lost messages.
-When evaluating the results, it is clear that the latency increases with the percentage of error and number of servers. When we pull focus to the situation with 7 servers and 50% of error, where we notice that after every glitch there is a linear decrease. This linear decrease is due to the leader sending the response to other previous requests that had not been committed yet, whilst sending the response to the client. Multiple requests can be pending since the client sends a new command after receiving the previous answer or after 15 seconds without receiving anything.
+When evaluating the results, it is clear that the latency increases with the percentage of error and number of servers.
+
+When we focus on the simulation that has 7 servers and 50% of error, it is noticeable that after every glitch there is a linear decrease.
+This linear decrease is due to the leader sending the response to other previous requests that had not been committed yet, whilst sending the response to the client.
+Multiple requests can be pending since the client sends a new command after receiving the previous answer or after 15 seconds without receiving anything.
 
 ### Election Time
 
-The election time measures the time interval between a certain follower becoming candidate and the time instant in which it stops being a candidate. This is done either by turning into a leader or into a follower again, as they both mean another leader is recognised. Figures 13 depicts the results.
+The election time measures the time interval between a certain follower becoming candidate and the time instant in which it stops being a candidate.
+This is done either by turning into a leader or into a follower again, as they both mean another leader is recognised.
 
-As expected, the election time grows with the number of servers and the percentage of error. The main factor is that more followers will turn into candidates with the increase of the error. This means, many parallel RequestVote RPCs sent in parallel. Adding the lost of messages that create more candidates to the lost of messages that keep them from getting the majority and winning an election, the time increases considerably.
+As expected, the election time grows with both the number of servers and the percentage of error.
+The main factor for this behaviour is that more followers will turn into candidates with the increase of the error which results in many parallel RequestVote RPCs sent in parallel.
+Adding the loss of messages that create more candidates and the loss of messages that keep them from getting the majority and winning an election, the time increases considerably.
 
 ### Convergence Time
 
-The convergence time is the time needed for the state machines of the servers to be consistent. It starts when the current leader commits a certain entry (with a specific index), and it ends when the last server commits that same entry. Figures 14 shows the results.
-The network traffic measures the number of messages exchanged during nodes since the moment in which the leader receives the command from the client until all servers have applied that command to their state machine. Figures 15, 16 and 17 show the results.
+The convergence time is the time needed for the state machines of the servers to be consistent.
+It starts when the current leader commits a certain entry (with a specific index), and it ends when the last server commits that same entry.
 
-The delay to consensus does not change much when comparing a different number of servers. Thus, the graphic available is only for the case where there are 3 servers. However, for different amounts of error, the results are distinct.
-An observation made is that the number of glitches increases with the number of servers. This happens when the leader receives a majority of positive acknowledges (for instance, 4 in the case of 7 servers) and it commits that entry together with those followers. However, the other 2 followers will need log replication, which will lead to a clear delay on reaching the consensus.
-Regarding the network traffic to consensus, it is relevant that, for low error percentages, the whole graphic shifts to a higher number of messages when the servers increase. In the example with 3 servers and no error, the leader has to receive two acknowledge messages and each server receives one AppendEntries. This adds up to a total of 4 exchanged messages, as we can see in the graphic. By applying the same reasoning to the others, we reach the same conclusion.
-When the error increases, also the exchange messages do. This happens due to many reasons:
+The delay to consensus does not change much when comparing a different number of servers.
+Thus, the graphic available is only for the case where there are 3 servers.
+However, for different amounts of error, the results are distinct.
+
+An observation made is that the number of glitches increases with the number of servers.
+This happens when the leader receives a majority of positive acknowledges (for instance, 4 in the case of 7 servers) and it commits that entry together with those followers.
+However, the other 2 followers will need log replication, which will lead to a clear delay on reaching the consensus.
+
+The network traffic measures the number of messages exchanged during nodes since the moment in which the leader receives the command from the client until all servers have applied that command to their state machine.
+
+It is relevant to note that, for low error percentages, the whole graphic shifts to a higher number of messages when the servers increase.
+In the example with 3 servers and no error, the leader has to receive two acknowledge messages and each server receives one *AppendEntries RPC*.
+This adds up to a total of 4 exchanged messages, as we can see in the graphic.
+By applying the same reasoning to the others, we reach the same conclusion.
+When the error increases so do the exchange messages. This happens due to many reasons:
 
 * Every time it does not get a majority of acknowledges, it has to send again the messages to every server, even though many have already received it.
 * The loss of messages makes it harder to win an election, and consequently more elections will occur.
