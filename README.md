@@ -60,6 +60,7 @@ Raft is based on only two Remote Procedure Calls. One of them being the AppendEn
 If a follower does not receive any heartbeat after a certain time (election timeout), it starts an election. To do so, it increments its own term and becomes a candidate. It votes for itself and sends RequestVote RPCs to the other servers.
 
 Each server can only vote for one candidate, at most, in a term. Three things might happen:
+
 * It receives votes for the majority of servers for the same term, wins the election and becomes leader. In the first heartbeat, it will let other servers know its position.
 * While waiting for answers, it receives AppendEntries RPC from another server. If its current term is greater, then the candidate returns to follower. Otherwise, the candidate rejects the RPC.
 * No candidate wins the election, if votes are split. Can- didates will time out and start a new election with a bigger term.
@@ -89,6 +90,7 @@ All the other communications are based on unicast. The Ap- pendEntriesRPC and th
 
 As mentioned before, Raft has to be be fault tolerant. This means that the state machines should converge in the presence of crash of nodes, delays of messages or the different arrival order of messages. The crash of nodes was not a concern for this project. The delay and consequent different order of arrival of messages is simulated in the method displayed in figure 2. The function BroadcastMessage() is used for both AppendEntries and RequestVotes in order to send parallel unicast messages to the other servers. Furthermore, there is a random selection of whether or not to send the message, according to a certain percentage.
 There is also one class for the Message, associated to each server. It allows to build messages of different types. These types are enumerated and agreed between all servers. Every server sends the messages along with their respective type identifier.
+
 * 0: Message from Client
 * 1: AppendEntries RPC from Leader
 * 2: Acknowledge for AppendEntries RPC with new En-
@@ -97,6 +99,7 @@ tries
 Entry (heartbeat)
 * 4: RequestVote RPC
 * 5: Acknowledge for RequestVote RPC
+
 The class Entry is implemented exactly as explained in Section 1. Each log consists on a list of instances of Entry.
 
 ### Client
@@ -113,9 +116,11 @@ As mentioned before, the leader checks if any command is received from the clien
 If 50ms have already passed, which is the heartbeat period, then it must send another AppendEntries RPC. This period was implemented using the System.nanoTime() for precision purposes.
 This includes the entries from the oldest to the newest, which the leader knows to have not been received by at least one follower. If there is none, then it will be just a heartbeat.
 Afterwards, it waits for unicast messages, which will be one of the many types stated in the class Message. Again, it uses a timeout of 1 ms just so it is not halted whilst waiting for commands.
+
 * Acknowledge to AppendEntries
 * RequestVote from a candidate
 * AppendEntries from another Leader
+
 The leader also checks every instance of the loop if it has some entry to commit, according to the responses received to the AppendEntries RPCs, as explained in the last section. This is done by comparing its own commitIndex to the matchIndex of the followers. The matchIndex of each follower is saved in the leader, and it corresponds to the last entry that the leader knows to be applied (committed) on that server. If there’s a majority of matchIndex to an entry not yet commited by the leader, then it will commit it.
 It will send, using unicast, the response to the leader. The leader will upade its commitIndex so it is sent in the AppendEntries RPCs, and other followers find out.
 
@@ -128,8 +133,10 @@ Just like the leader, it waits for unicast messages, that will be one of the man
 #### Follower
 
 The follower has a passive role. It simply reads the unicast messages it receives, which are the following:
+
 * AppendEntries from a Leader
 * RequestVote from a candidate
+
 If it does not receive an AppendEntries after a certain predefined timeout, it turns to Candidate.
 As alluded to above, when the follower receives an Appen- dEntries RPC, it must perform a consistency check in order to see if its log is updated or not. The logs might be inconsistent, as shown in Figure 4. There might be missing entries, extra entries or both.
 To implement the log replication algorithm presented in Section 1, the leader must maintain a nextIndex for each follower, which corresponds to the next entry to be sent to that follower. These are initialised when the server becomes leader to the index after the last entry in its log. This means that the leader assumes that the followers are updated.
@@ -166,6 +173,7 @@ The delay to consensus does not change much when comparing a different number of
 An observation made is that the number of glitches increases with the number of servers. This happens when the leader receives a majority of positive acknowledges (for instance, 4 in the case of 7 servers) and it commits that entry together with those followers. However, the other 2 followers will need log replication, which will lead to a clear delay on reaching the consensus.
 Regarding the network traffic to consensus, it is relevant that, for low error percentages, the whole graphic shifts to a higher number of messages when the servers increase. In the example with 3 servers and no error, the leader has to receive two acknowledge messages and each server receives one AppendEntries. This adds up to a total of 4 exchanged messages, as we can see in the graphic. By applying the same reasoning to the others, we reach the same conclusion.
 When the error increases, also the exchange messages do. This happens due to many reasons:
+
 * Every time it does not get a majority of acknowledges, it has to send again the messages to every server, even though many have already received it.
 * The loss of messages makes it harder to win an election, and consequently more elections will occur.
 * More followers will not have received the AppendEntries and they will turn into candidates. This creates conflicts between VoteRequest RPCs which increases the network traffic.
