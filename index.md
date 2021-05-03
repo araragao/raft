@@ -11,8 +11,6 @@ The crash of server nodes is not considered, only the delay and consequent diffe
 
 Furthermore, the implementation's source code is provided.
 
-### Test
-
 #### The team
 
 <div align="center">
