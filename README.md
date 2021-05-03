@@ -96,8 +96,15 @@ In the first heartbeat it send, it will let other servers know its role.
 
 ### Log Replication
 
-As said before, the leader receives the commands from the client. When it receives a command, it adds a new entry with that command onto its log. In the next AppendEntries RPCs, it replicates it. Each entry contains the respective command, the term in which it was received, and an index that identifies its position in the log.
-These are used to make a consistency check: when sending an AppendEntries RPC, the leader sends the index and term of the entry in its log that precedes the new entries that it is sending now. The follower will try to find on its log the respective entry, and if this is found to be true, it means the log of the follower is updated. Otherwise, it refuses the new entries. When the logs are inconsistent, the leader forces the followers’ logs to duplicate its own, as will be explained further in Section 2.
+As stated, the leader receives the commands from the client.
+When it receives a command, it adds a new *entry* with that command into its log.
+In the next *AppendEntries RPCs*, it replicates it.
+
+Each *entry* contains the respective command, the term in which it was received, and an index that identifies its position in the log.
+These are used to make a consistency check: when sending an *AppendEntries RPC*, the leader sends the index and the term of the entry in its log that precedes the new entries that it is sending. 
+The follower will try to find on its log the respective entry, and if it does, it means the log of the follower is updated.
+Otherwise, it refuses the new entries.
+When the logs are inconsistent, the leader forces the followers’ logs to duplicate its own, as will be explained further.
 
 ### State Machine
 
