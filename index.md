@@ -83,17 +83,25 @@ Furthermore, the implementation's source code is provided.
         <li><a href="#convergence-time">Convergence Time</a></li>
       </ul>
     <li><a href="#general-review">General Review</a></li>
-    <li><a href="#further-work">Further work</a></li>
+    <li><a href="#further-work">Further Work</a></li>
+    <li><a href="#annexes">Annexes</a></li>
+     <ul>
+        <li><a href="#complete-class-diagram">Complete Class Diagram</a></li>
+      </ul>
   </ol>
 </details>
+
+## Annexes
+
+### Complete Class Diagram
 
 ## Raft Overview
 
 In Raft, each server can be, at a given time, in one of three states:
 
-* Leader
-* Candidate
-* Follower
+* **Leader**
+* **Candidate**
+* **Follower**
 
 Raft works by having one distinguished leader.
 This leader is responsible for:
@@ -145,7 +153,7 @@ Otherwise, it refuses the new entries.
 When the logs are inconsistent, the leader forces the followers’ logs to duplicate its own, as will be explained further.
 
 <p align="center">
-  <img src="pictures/graphics/log-replication.png" width="50%" alt="log-replication">
+  <img src="pictures/graphics/log-replication.png" width="40%" alt="log-replication">
 </p>
 
 ### State Machine
@@ -224,6 +232,8 @@ This takes place on the class ServerThread, which implements the following state
 <p align="center">
   <img src="pictures/graphics/server-state-machine.png"  width="65%" alt="server-state-machine">
 </p>
+
+The complete class diagram can be found in the Annexes section.
 
 #### Leader
 
@@ -370,7 +380,15 @@ The reduced number of message types and the simplicity of the state machine on w
 
 It can be understood that altough simpler, Raft still ensure safety by limiting the ways in which the logs might be inconsistent.
 
-## Further work
+## Further Work
 
 Crash tests should be taken into consideration when evaluating Raft performance.
 Besides, using different languages, and programming methods, should provide a stronger understanding of Raft performance.
+
+## Annexes
+
+### Complete Class Diagram
+
+<p align="center">
+  <img src="pictures/graphics/class-diagram.png" alt="class-diagram">
+</p>
