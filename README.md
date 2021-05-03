@@ -14,7 +14,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
     </li>
-    <li><a href="#raft-overview">RAFT Overview</a></li>
+    <li><a href="#raft-overview">Raft Overview</a></li>
       <ul>
         <li><a href="#leader-election">Leader Election</a></li>
         <li><a href="#log-replication">Log Replication</a></li>
