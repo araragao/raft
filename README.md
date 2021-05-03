@@ -2,7 +2,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/araragao/raft/tree/main/pictures">
-    <img src="images/raft_repository_logo.png" alt="Logo">
+    <img src="pictures/raft_repository_logo.png" alt="Logo">
   </a>
 
   <h3 align="center">RAFT Analysis and Implementation</h3>
