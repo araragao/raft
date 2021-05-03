@@ -78,14 +78,21 @@ By doing that, the server, whether a leader or a candidate, immediately becomes 
 
 ### Leader Election
 
-Raft is based on only two Remote Procedure Calls. One of them being the AppendEntries RPC. These are initiated by the leaders periodically. They replicate log entries, if there are any to be replicated, and provide a form of heartbeat.
-If a follower does not receive any heartbeat after a certain time (election timeout), it starts an election. To do so, it increments its own term and becomes a candidate. It votes for itself and sends RequestVote RPCs to the other servers.
+Raft is based on two **remote procedure calls**, refered from now on as *RPCs*:
+* *AppendEntries RPC* which is initiated by the leader periodically.
+It replicates log entries, if there are any to be replicated, and provides a form of heartbeat.
+* *RequestVote RPC* which is iniated by a follower to start an election
 
-Each server can only vote for one candidate, at most, in a term. Three things might happen:
+If a follower does not receive any heartbeat, after a certain time, known as *election timeout*, it starts an election.
+To do so, it increments its own term and becomes a candidate.
+It votes for itself and request a vote from the other servers.
+Each server can only vote for one candidate, at most, in a *term*.
+There are three outputs from an election:
 
-* It receives votes for the majority of servers for the same term, wins the election and becomes leader. In the first heartbeat, it will let other servers know its position.
-* While waiting for answers, it receives AppendEntries RPC from another server. If its current term is greater, then the candidate returns to follower. Otherwise, the candidate rejects the RPC.
-* No candidate wins the election, if votes are split. Can- didates will time out and start a new election with a bigger term.
+1. The candidate receives votes for the majority of servers during the *term*, wins the election and becomes the leader.
+In the first heartbeat it send, it will let other servers know its role.
+2. While waiting for answers, the candidate receives an *AppendEntries RPC* from another server. If the other server's current *term* is greater, then the candidate returns to follower. Otherwise, the candidate rejects the RPC.
+3. There is no majority in regards to the votes resulting in no candidate winning the election.Candidates will time out and start a new election with a bigger term.
 
 ### Log Replication
 
