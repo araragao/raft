@@ -156,10 +156,6 @@ When doing this, it also commits all preceding entries in its log.
 The *AppendEntries RPC* also contains the *commitIndex*, which corresponds to the last commited index.
 The servers will acknowledge this, and apply the command to their own state machines.
 
-<p align="center">
-  <img src="pictures/graphics/server-state-machine.png" alt="server-state-machine">
-</p>
-
 ## Implementation
 
 The implementation was based on the suggestions from the Raft paper itself.
@@ -223,7 +219,11 @@ It send a new command either after receiving the response to the previous one or
 ### Servers' State Machine
 
 Each server runs in an infinite loop that has a switch condition according to the state of the server.
-This takes place on the class ServerThread, which implements the following state machine [ADD HERE!].
+This takes place on the class ServerThread, which implements the following state machine.
+
+<p align="center">
+  <img src="pictures/graphics/server-state-machine.png" alt="server-state-machine">
+</p>
 
 #### Leader
 
