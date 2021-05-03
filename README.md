@@ -51,6 +51,8 @@ This project aims to :
 * Provide real data regarding the usage of 3, 5 and 7 servers
 * Discuss its performance
 
+It is important to mention that the crash of nodes was not a concern for this project, only the delay and consequent different order of arrival of messages was simulated.
+
 Furthermore, the implementation's source code is provided.
 
 ## Raft Overview
@@ -117,71 +119,116 @@ The servers will acknowledge this, and apply the command to their own state mach
 ## Implementation
 
 The implementation was based on the suggestions from the Raft paper itself.
-Variables are named according to the paper for a matter of consistency. It is well explained in the Class Diagram in the Annex, which indicates exactly the classes that were implemented.
+Variables are named according to the paper for a matter of consistency.
+For further clarification, a class diagram is provided.
 
-To each server, there is a MulticastCommunicationPackage and a UnicastCommunicationPackage that implement commu- nication services.
-The network was implemented using threads: each server is a thread running. The communications are also implemented using UDP. The thread scheduling is not problematic. Due to the lack of reliability of UDP, the application might have to deal with loss of packets, delays and different orders of arrival. The only communication is through messages, even though they are running on the same machine. In other words, there is no memory sharing.
+Each server makes use of a *MulticastCommunicationPackage* and a *UnicastCommunicationPackage* that implement communication services .
+As a consequence, all servers support multicast and unicast communication.
 
-In the beginning all nodes (including the client) exchange their IDs, which correspond to their ports. They also know a priori the port for multicast, which is passed as an argument when creating the server. Each node supports both multicast and unicast communication.
+All communications occur over UDP and the network was implemented using threads.
+Even though all server nodes are running on the same machine, all communication happens through messages, with no use of shared memory.
+Due to the lack of reliability of UDP, the application might have to deal with loss of packets, delays and different orders of arrival.
 
-The multicast communication will be used only for the communication between the client and the leader. The client does not know which server is the leader, so it sends a multicast message to the multicast group. All servers, except for the leader, must ignore that message. The response from the leader to the client is a unicast message.
+In the beginning, all nodes, including the client, exchange their IDs, which correspond to their ports.
+The multicast port is known *a priori*, which is passed as an argument when a server is created.
 
-All the other communications are based on unicast. The Ap- pendEntriesRPC and the RequestVoteRPC are sent in parallel to all other servers, but still they are not implemented using multicast. It consists on sending separate messages to each server individually. The function is called broadcastMessage, but the name is just suggestive, as it is based on unicast. One of the reasons to this implementation is the simulation of messaging lost in the network.
+The multicast communication is only used for the communication between the client and the leader.
+It is important to emphasize that the reason why multicast needs to be supported by all server nodes is not only a result of the dynamic server role enforced by Raft but also of our own implementation.
+The client does not know which server is the leader, so it sends a multicast message to the multicast group.
+All servers, except for the leader, must ignore that message.
+The response from the leader to the client is a unicast message.
 
-As mentioned before, Raft has to be be fault tolerant. This means that the state machines should converge in the presence of crash of nodes, delays of messages or the different arrival order of messages. The crash of nodes was not a concern for this project. The delay and consequent different order of arrival of messages is simulated in the method displayed in figure 2. The function BroadcastMessage() is used for both AppendEntries and RequestVotes in order to send parallel unicast messages to the other servers. Furthermore, there is a random selection of whether or not to send the message, according to a certain percentage.
-There is also one class for the Message, associated to each server. It allows to build messages of different types. These types are enumerated and agreed between all servers. Every server sends the messages along with their respective type identifier.
+All the other communications are based on unicast.
+The *AppendEntries RPC* and the *RequestVote RPC* are sent in parallel to all other servers by sending separate messages to each server individually, thus using unicast and not multicast communication.
+The function in use is called broadcastMessage(), but the name is just suggestive, as it is based on unicast.
+One of the reasons to this implementation is the simulation of messaging lost in the network.
+
+As mentioned before, Raft has to be be fault tolerant.
+This means that the state machines should converge in the presence of crash of nodes, delays of messages or the different arrival order of messages.
+The crash of nodes was not a concern for this project.
+The delay and consequent different order of arrival of messages was achieved through the use of a random function that outputs a percentual value.
+Depending on its value, a message is sent, or not.
+
+There is also one class for the Message, associated to each server.
+It allows to build messages of different types.
+These types are enumerated and agreed between all servers.
+Every server sends the messages along with their respective type identifier.
 
 * 0: Message from Client
-* 1: AppendEntries RPC from Leader
-* 2: Acknowledge for AppendEntries RPC with new En-
-tries
-* 3: Acknowledge for AppendEntries RPC without any
-Entry (heartbeat)
-* 4: RequestVote RPC
-* 5: Acknowledge for RequestVote RPC
+* 1: *AppendEntries RPC* from Leader
+* 2: Acknowledge for *AppendEntries RPC* with new Entries
+* 3: Acknowledge for *AppendEntries RPC* without any Entry (heartbeat)
+* 4: *RequestVote RPC*
+* 5: Acknowledge for *RequestVote RPC*
 
-The class Entry is implemented exactly as explained in Section 1. Each log consists on a list of instances of Entry.
+The class Entry is implemented exactly as explained before.
 
 ### Client
 
-The commands from the client have the following form: add/sub + integer and they are generated in a random way. The client runs in an infinite loop. It send a new command either after receiving the response to the previous one or after 14 seconds.
+The commands from the client have the following form: 
+* add/sub + integer
+
+The commands are generated in a random way.
+The client runs in an infinite loop. 
+It send a new command either after receiving the response to the previous one or after 14 seconds.
 
 ### State Machine Loop
 
-Each server runs in an infinite loop that has a switch condition according to the state of the server. This takes place on the class ServerThread, which implements the following state machine [ADD HERE!].
+Each server runs in an infinite loop that has a switch condition according to the state of the server.
+This takes place on the class ServerThread, which implements the following state machine [ADD HERE!].
 
 #### Leader
 
-As mentioned before, the leader checks if any command is received from the client and if so, the leader adds it as a new entry to its log. The socket has a timeout of 1 ms, as it is not supposed to be halted expecting a command.
-If 50ms have already passed, which is the heartbeat period, then it must send another AppendEntries RPC. This period was implemented using the System.nanoTime() for precision purposes.
-This includes the entries from the oldest to the newest, which the leader knows to have not been received by at least one follower. If there is none, then it will be just a heartbeat.
+As mentioned before, the leader checks if any command is received from the client and if so, the leader adds it as a new entry to its log.
+The socket has a timeout of 1 ms, as it is not supposed to be halted expecting a command.
+If 50ms have already passed, which is the heartbeat period, then it must send another *AppendEntries RPC*.
+This period was implemented using the System.nanoTime() for precision purposes.
+This includes the entries from the oldest to the newest, which the leader knows to have not been received by at least one follower.
+If there is none, then it will be just a heartbeat.
 Afterwards, it waits for unicast messages, which will be one of the many types stated in the class Message. Again, it uses a timeout of 1 ms just so it is not halted whilst waiting for commands.
 
-* Acknowledge to AppendEntries
-* RequestVote from a candidate
-* AppendEntries from another Leader
+* Acknowledge to *AppendEntries RPC*
+* *RequestVote RPC* from a candidate
+* *AppendEntries RPC* from another Leader
 
-The leader also checks every instance of the loop if it has some entry to commit, according to the responses received to the AppendEntries RPCs, as explained in the last section. This is done by comparing its own commitIndex to the matchIndex of the followers. The matchIndex of each follower is saved in the leader, and it corresponds to the last entry that the leader knows to be applied (committed) on that server. If there’s a majority of matchIndex to an entry not yet commited by the leader, then it will commit it.
-It will send, using unicast, the response to the leader. The leader will upade its commitIndex so it is sent in the AppendEntries RPCs, and other followers find out.
+The leader also checks every instance of the loop if it has some entry to commit, according to the responses received to the *AppendEntries RPCs*, as explained in the last section.
+This is done by comparing its own *commitIndex* to the *matchIndex* of the followers.
+The *matchIndex* of each follower is saved in the leader, and it corresponds to the last entry that the leader knows has been commited to that server.
+If there’s a majority of *matchIndex* to an entry not yet commited by the leader itself, then it will commit it.
+It will send, using unicast, the response to the client.
+The leader will updade its *commitIndex* so it is sent in the *AppendEntries RPCs*, and other followers find out.
 
 #### Candidate
 
-The period for sending the RequestVote RPC was implemented the same way as the AppendEntries RPC in the leader.
-The timeout for waiting for an answer was defined in a random way when creating the server. This had a value between 150ms and 300ms, as suggested in the paper, but it is fixed for a specific server during the whole execution.
-Just like the leader, it waits for unicast messages, that will be one of the many types of state in the class Message:
+The period for sending the *RequestVote RPC* is implemented the same way as the *AppendEntries RPC* in the leader.
+The timeout for waiting for an answer is defined in a random way when creating the server.
+This has a value between 150ms and 300ms, as suggested in the paper, and it is fixed for each server during the whole execution.
+In the same way as the leader, the candidate waits for unicast messages, that will be one of the many types of state in the class Message:
+
+* Acknowledge to *RequestVote RPC*
+* *RequestVote RPC* from another candidate
+* *AppendEntries RPC* from another Leader
 
 #### Follower
 
-The follower has a passive role. It simply reads the unicast messages it receives, which are the following:
+The follower has a passive role.
+It simply reads the unicast messages it receives, which are the following:
 
-* AppendEntries from a Leader
-* RequestVote from a candidate
+* *AppendEntries RPC* from a Leader
+* *RequestVote RPC* from a candidate
 
-If it does not receive an AppendEntries after a certain predefined timeout, it turns to Candidate.
-As alluded to above, when the follower receives an Appen- dEntries RPC, it must perform a consistency check in order to see if its log is updated or not. The logs might be inconsistent, as shown in Figure 4. There might be missing entries, extra entries or both.
-To implement the log replication algorithm presented in Section 1, the leader must maintain a nextIndex for each follower, which corresponds to the next entry to be sent to that follower. These are initialised when the server becomes leader to the index after the last entry in its log. This means that the leader assumes that the followers are updated.
-If this turns out to be false, then the AppendEntries consis- tency check will fail. The leader will decrement the nextIndex for that follower, and retry the AppendEntries RPC. Eventually the answer will be true, meaning, they reached a point in which they are consistent. Note that if a follower receives an AppendEntries request that includes log entries already present in its log, it ignores those entries in the new request by answering true.
-This last AppendEntries RPC will eliminate any subsequent entries from the follower’s log and append the new ones.
+If it does not receive an *AppendEntries RPC* after a certain predetermined timeout, it turns into Candidate.
+As alluded to above, when the follower receives an *AppendEntries RPC* it must perform a consistency check in order to see if its log is updated or not.
+The logs might be inconsistent.
+There might be missing entries, extra entries or both.
+
+To implement the log replication algorithm presented before, the leader must maintain a *nextIndex* for each follower, which corresponds to the next entry to be sent to that follower.
+These are initialised when the server becomes leader to the index after the last entry in its log. This means that the leader assumes that the followers are updated.
+If this turns out to be false, then the *AppendEntries RPC* consistency check will fail.
+The leader will decrement the *nextIndex* for that follower, and retry the *AppendEntries RPC*. Eventually the answer will be true, meaning, they reached a point in which they are consistent.
+
+Note that if a follower receives an *AppendEntries RPC* request that includes log entries already present in its log, it ignores those entries in the new request by answering true.
+This last *AppendEntries RPC* will eliminate any subsequent entries from the follower’s log and append the new ones.
 
 ### Interface
 
