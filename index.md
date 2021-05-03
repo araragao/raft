@@ -1,6 +1,6 @@
 ## About The Project
 
-This project aims to :
+This project aims to:
 
 * Explain what **Raft** is about
 * Describe its implementation using Java
@@ -16,7 +16,7 @@ Furthermore, the implementation's source code is provided.
 <div align="center">
   <div style="display: flex; align-items: flex-start;">
     <div class="team-member">
-      <div style="margin: 15px">
+      <div style="margin: 10px">
         <div class="name">
           André
         </div>
@@ -28,7 +28,7 @@ Furthermore, the implementation's source code is provided.
       </div>
     </div>
     <div class="team-member">
-      <div style="margin: 15px">
+      <div style="margin: 10px">
         <div class="name">
           André
         </div>
@@ -40,7 +40,7 @@ Furthermore, the implementation's source code is provided.
       </div>
     </div>
     <div class="team-member">
-      <div style="margin: 15px">
+      <div style="margin: 10px">
         <div class="name">
           Margarida
         </div>
