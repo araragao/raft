@@ -101,6 +101,10 @@ This leader is responsible for:
 * Receiving the commands from the client
 * Managing the log replication
 
+<p align="center">
+  <img src="pictures/graphics/terms-evolution.png" alt="terms-evolution">
+</p>
+
 An important aspect is the concept of **term**.
 A term is an interval of time that starts with an election.
 If a leader is elected, then that server will be leader for that term.
@@ -140,6 +144,10 @@ The follower will try to find on its log the respective entry, and if it does, i
 Otherwise, it refuses the new entries.
 When the logs are inconsistent, the leader forces the followers’ logs to duplicate its own, as will be explained further.
 
+<p align="center">
+  <img src="pictures/graphics/log-replication.png" alt="log-replication">
+</p>
+
 ### State Machine
 
 The leader decides when is it safe to apply a specific command to the state machines, i.e. to commit a specific entry.
@@ -148,11 +156,19 @@ When doing this, it also commits all preceding entries in its log.
 The *AppendEntries RPC* also contains the *commitIndex*, which corresponds to the last commited index.
 The servers will acknowledge this, and apply the command to their own state machines.
 
+<p align="center">
+  <img src="pictures/graphics/server-state-machine.png" alt="server-state-machine">
+</p>
+
 ## Implementation
 
 The implementation was based on the suggestions from the Raft paper itself.
 Variables are named according to the paper for a matter of consistency.
 For further clarification, a class diagram is provided.
+
+<p align="center">
+  <img src="pictures/graphics/class-diagram-small.png" alt="class-diagram-small">
+</p>
 
 Each server makes use of a *MulticastCommunicationPackage* and a *UnicastCommunicationPackage* that implement communication services .
 As a consequence, all servers support multicast and unicast communication.
