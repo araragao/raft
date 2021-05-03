@@ -143,7 +143,7 @@ The *AppendEntries RPC* and the *RequestVote RPC* are sent in parallel to all ot
 The function in use is called broadcastMessage(), but the name is just suggestive, as it is based on unicast.
 One of the reasons to this implementation is the simulation of messaging lost in the network.
 
-As mentioned before, Raft has to be be fault tolerant.
+As mentioned before, Raft has to be fault tolerant.
 This means that the state machines should converge in the presence of crash of nodes, delays of messages or the different arrival order of messages.
 The crash of nodes was not a concern for this project.
 The delay and consequent different order of arrival of messages was achieved through the use of a random function that outputs a percentual value.
