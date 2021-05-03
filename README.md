@@ -301,11 +301,31 @@ When the error increases so do the exchange messages. This happens due to many r
 
 ## General Review
 
-The tests performed were only in the context of lost mes- sages since we did not have into consideration server crashes. Indeed we can acknowledge that the safety of Raft does not depend on timing: sooner or later they will converge to the same state. This happened even when testing with 70% of
-lost messages, which shows the robustness of the algorithm. The results made it obvious, however, the availability de- pends on that. By availability we mean ”the ability of a system to respond to clients in a timely manner”, as stated in [1], which we measured through the latency. In fact, the latency is not the biggest problem. The expected course of events is when the client sends a command, which will be ignored by the candidates and followers. The biggest problem is if the leader changes to follower, due to any other candidate becoming leader, before it reads that command, because, this
-means the command will be lost.
-Understandability is one of the strongest points offered by
-Raft, however, it is hard to make any strong conclusions when comparing Raft with Paxos. This is due to the fact that we are not as familiarised with Paxos as we are with Raft after completing this project. Furthermore, the implementation of Raft is more straight forward, since the reduced number of message types, and the simplicity of the state machine on which it relies create a more effortless implementation. A clearer interpretation allows one to confirm that it still ensures safety, by limiting the ways in which the logs might be inconsistent.
+The tests performed were only in the context of message loss since server crashes were not taken into consideration.
+
+It can be acknowledged that the safety of Raft does not depend on timing: sooner or later all server nodes will converge to the same state.
+This happened even when testing with 70% of message loss, which shows the robustness of the algorithm.
+
+The results made it obvious, however, that the availability is strongly related to the message loss.
+Availability is described ”the ability of a system to respond to clients in a timely manner”, as stated in Raft paper, which was measured through the latency testing.
+It can be concluded that the higher the message loss the lower the availability of the system.
+
+Nerverthless, the latency is not its biggest problem.
+The normal course of events contemplates the rejection of messages from the client when the server node is a candidate or a follower.
+A problem arises when a server node changes from leader to follower: when this happens, at the same time, a candidate is changing to leader, and a message loss might happen due change ocurring before the client's command is read.
+
+Understandability is one of the strongest points offered by Raft, however, it is hard to make any strong conclusions when comparing Raft with Paxos.
+This is due to the fact that Paxos was not studied as thorough as Raft.
+
+When comparing Raft to Paxos, it is worth noting that the implementation of Raft is more straight forward according to existing literature.
+The reduced number of message types and the simplicity of the state machine on which it relies are the most relevant characteristics responsible for that.
+
+It can be understood that altough simpler, Raft still ensure safety by limiting the ways in which the logs might be inconsistent.
+
+## Further work
+
+Crash tests should be taken into consideration when evaluating Raft performance.
+Besides, using different languages, and programming methods, should provide a stronger understanding of Raft performance.
 
 ## Contact
 
