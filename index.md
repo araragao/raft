@@ -222,7 +222,7 @@ Each server runs in an infinite loop that has a switch condition according to th
 This takes place on the class ServerThread, which implements the following state machine.
 
 <p align="center">
-  <img src="pictures/graphics/server-state-machine.png"  width="50%" alt="server-state-machine">
+  <img src="pictures/graphics/server-state-machine.png"  width="65%" alt="server-state-machine">
 </p>
 
 #### Leader
