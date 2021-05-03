@@ -232,9 +232,24 @@ This last *AppendEntries RPC* will eliminate any subsequent entries from the fol
 
 ### Interface
 
-The Graphical User Interface was designed having in mind simplicity and ease of use since it was only developed for a matter of making it easier to evaluate the behaviour of the implemented algorithm in an empiric way.
-Consequently, for each server the corresponding GUI shows the server id, the election timeout, the current role, the current term and the commited value. Besides that, each server’s GUI also has a button to check it’s log.
-The client’s GUI only displays the client id, the local value and the received value from the leader, to easily check the consistency between the server’s and the client value. Having the same goal in mind, it also displays the command list.
+The Graphical User Interface, GUI, was designed having in mind simplicity and ease of use since it was only developed with the objective of making it easier to evaluate the behaviour of the implemented algorithm in an empiric way.
+Consequently, for each server the corresponding GUI shows the:
+
+* Server id
+* Election timeout
+* Current role
+* Current term
+* Commited value
+
+Besides that, each server’s GUI also has a button to check its log.
+
+The client’s GUI only displays the:
+* Client id
+* Local value
+* Received value (from the leader)
+
+The received value is displayed to easily check the consistency between the server’s and the client value.
+Having the same goal in mind, it also has a button to check the command list.
 
 ## Results and Performance Analysis
 
