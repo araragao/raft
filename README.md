@@ -108,12 +108,16 @@ When the logs are inconsistent, the leader forces the followers’ logs to dupli
 
 ### State Machine
 
-The leader decides when is it safe to apply a specific command to the state machines, i.e. to commit a specific entry. It commits a certain entry after replicating it on the majority of the servers. When doing this, it also commits all preceding entries in its log.
-The AppendEntries RPC also contains the commitIndex, which corresponds to the last commited index. The servers will acknowledge this, and apply the command to their own state machines.
+The leader decides when is it safe to apply a specific command to the state machines, i.e. to commit a specific entry.
+It commits a certain *entry* after replicating it on the majority of the servers.
+When doing this, it also commits all preceding entries in its log.
+The *AppendEntries RPC* also contains the *commitIndex*, which corresponds to the last commited index.
+The servers will acknowledge this, and apply the command to their own state machines.
 
 ## Implementation
 
-The implementation was based on the suggestions from the RAFT paper itself. Variables are named according to the paper for a matter of consistency. It is well explained in the Class Diagram in the Annex, which indicates exactly the classes that were implemented.
+The implementation was based on the suggestions from the Raft paper itself.
+Variables are named according to the paper for a matter of consistency. It is well explained in the Class Diagram in the Annex, which indicates exactly the classes that were implemented.
 
 To each server, there is a MulticastCommunicationPackage and a UnicastCommunicationPackage that implement commu- nication services.
 The network was implemented using threads: each server is a thread running. The communications are also implemented using UDP. The thread scheduling is not problematic. Due to the lack of reliability of UDP, the application might have to deal with loss of packets, delays and different orders of arrival. The only communication is through messages, even though they are running on the same machine. In other words, there is no memory sharing.
