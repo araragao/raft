@@ -1,6 +1,6 @@
 ## About The Project
 
-This project aims to :
+This project aims to:
 
 * Explain what **Raft** is about
 * Describe its implementation using Java
