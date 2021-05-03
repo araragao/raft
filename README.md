@@ -188,8 +188,8 @@ Raft, however, it is hard to make any strong conclusions when comparing Raft wit
 
 ## Contact
 
-André Aragão - [@andreribeiroaragao](https://www.linkedin.com/in/andreribeiroaragao/) - up201606535@fe.up.pt
+André Aragão - [@andreribeiroaragao](https://www.linkedin.com/in/andreribeiroaragao/) - up201606535@edu.fe.up.pt
 
-André Matos - [@andre-matos98](https://www.linkedin.com/in/andre-matos98/) - up201606326@fe.up.pt
+André Matos - [@andre-matos98](https://www.linkedin.com/in/andre-matos98/) - up201606326@edu.fe.up.pt
 
-Margarida Marques - [@margarida-marques-b65618162/](https://www.linkedin.com/in/margarida-marques-b65618162/) - up201603208@fe.up.pt
+Margarida Marques - [@margarida-marques-b65618162/](https://www.linkedin.com/in/margarida-marques-b65618162/) - up201603208@edu.fe.up.pt
