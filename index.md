@@ -102,7 +102,7 @@ This leader is responsible for:
 * Managing the log replication
 
 <p align="center">
-  <img src="pictures/graphics/terms-evolution.png" alt="terms-evolution">
+  <img src="pictures/graphics/terms-evolution.png"  width="50%" alt="terms-evolution">
 </p>
 
 An important aspect is the concept of **term**.
@@ -145,7 +145,7 @@ Otherwise, it refuses the new entries.
 When the logs are inconsistent, the leader forces the followers’ logs to duplicate its own, as will be explained further.
 
 <p align="center">
-  <img src="pictures/graphics/log-replication.png" alt="log-replication">
+  <img src="pictures/graphics/log-replication.png" width="50%" alt="log-replication">
 </p>
 
 ### State Machine
@@ -222,7 +222,7 @@ Each server runs in an infinite loop that has a switch condition according to th
 This takes place on the class ServerThread, which implements the following state machine.
 
 <p align="center">
-  <img src="pictures/graphics/server-state-machine.png" alt="server-state-machine">
+  <img src="pictures/graphics/server-state-machine.png"  width="50%" alt="server-state-machine">
 </p>
 
 #### Leader
