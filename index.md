@@ -7,7 +7,7 @@ This project aims to:
 * Provide real data regarding the usage of 3, 5 and 7 servers
 * Discuss its performance
 
-The crash of server nodes is not considered, only the delay and consequent different order of arrival of messages was addressed.
+The crash of server nodes is not considered, only the messages' delay.
 
 Furthermore, the implementation's source code is provided.
 
