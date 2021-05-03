@@ -4,21 +4,8 @@
   <a href="https://github.com/araragao/raft/tree/main/pictures">
     <img src="pictures/raft_repository_logo.png" alt="Logo">
   </a>
-
   <h3 align="center">RAFT Analysis and Implementation</h3>
-
-  <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
-  </p>
+  <p align="center">Protocol overview, java implementation and performance analysis</p>
 </p>
 
 
@@ -29,23 +16,39 @@
   <ol>
     <li>
       <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
+    <li><a href="#raft-overview">RAFT Overview</a></li>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#leader-election">Leader Election</a></li>
+        <li><a href="#log-replication">Log Replication</a></li>
+        <li><a href="#update-state-machine">State Machine Updates</a></li>
       </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
+    <li><a href="#implementation">Implementation</a></li>
+      <ul>
+        <li><a href="#client">Client</a></li>
+        <li><a href="#state-machine-loop">State Machine Loop</a></li>
+        <li><a href="#update-state-machine">State Machine Updates</a></li>
+            <ul>
+              <li><a href="#leader">Leader</a></li>
+              <li><a href="#candidate">Candidate</a></li>
+              <li><a href="#follower">Follower</a></li>
+            </ul>
+        <li><a href="#interface">Interface</a></li>
+      </ul>
+    <li><a href="#results">Results</a></li>
+      <ul>
+        <li><a href="#latency-results">Latency</a></li>
+        <li><a href="#election-time-results">Election Time</a></li>
+        <li><a href="#convergence-time-results">Convergence Time</a></li>
+      </ul>
+    <li><a href="#performance-analysis">Performance Analysis</a></li>
+      <ul>
+        <li><a href="#latency-analysis">Latency</a></li>
+        <li><a href="#election-time-analysis">Election Time</a></li>
+        <li><a href="#convergence-time-analysis">Convergence Time</a></li>
+      </ul>
+    <li><a href="#general-review">General Review</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
@@ -76,93 +79,11 @@ This section should list any major frameworks that you built your project using.
 
 
 
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```JS
-   const API_KEY = 'ENTER YOUR API';
-   ```
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-
-
-<!-- ROADMAP -->
-## Roadmap
-
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-
-
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-
-
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+André Aragão - [@andreribeiroaragao](https://www.linkedin.com/in/andreribeiroaragao/) - up201606535@fe.up.pt
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+André Matos - [@andre-matos98](https://www.linkedin.com/in/andre-matos98/) - up201606326@fe.up.pt
 
-
-
-<!-- ACKNOWLEDGEMENTS -->
-## Acknowledgements
-* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-* [Img Shields](https://shields.io)
-* [Choose an Open Source License](https://choosealicense.com)
-* [GitHub Pages](https://pages.github.com)
-* [Animate.css](https://daneden.github.io/animate.css)
-* [Loaders.css](https://connoratherton.com/loaders)
-* [Slick Carousel](https://kenwheeler.github.io/slick)
-* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-* [Sticky Kit](http://leafo.net/sticky-kit)
-* [JVectorMap](http://jvectormap.com)
-* [Font Awesome](https://fontawesome.com)
+Margarida Marques - [@margarida-marques-b65618162/](https://www.linkedin.com/in/margarida-marques-b65618162/) - up201603208@fe.up.pt
