@@ -23,7 +23,7 @@
     <li><a href="#implementation">Implementation</a></li>
       <ul>
         <li><a href="#client">Client</a></li>
-        <li><a href="#state-machine-loop">State Machine Loop</a></li>
+        <li><a href="#servers-state-machine">Servers' State Machine</a></li>
             <ul>
               <li><a href="#leader">Leader</a></li>
               <li><a href="#candidate">Candidate</a></li>
@@ -38,6 +38,7 @@
         <li><a href="#convergence-time">Convergence Time</a></li>
       </ul>
     <li><a href="#general-review">General Review</a></li>
+    <li><a href="#further-work">Further work</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
 </details>
@@ -143,7 +144,7 @@ The *AppendEntries RPC* and the *RequestVote RPC* are sent in parallel to all ot
 The function in use is called broadcastMessage(), but the name is just suggestive, as it is based on unicast.
 One of the reasons to this implementation is the simulation of messaging lost in the network.
 
-As mentioned before, Raft has to be fault tolerant.
+As mentioned before, Raft has to be be fault tolerant.
 This means that the state machines should converge in the presence of crash of nodes, delays of messages or the different arrival order of messages.
 The crash of nodes was not a concern for this project.
 The delay and consequent different order of arrival of messages was achieved through the use of a random function that outputs a percentual value.
@@ -172,7 +173,7 @@ The commands are generated in a random way.
 The client runs in an infinite loop. 
 It send a new command either after receiving the response to the previous one or after 14 seconds.
 
-### State Machine Loop
+### Servers' State Machine
 
 Each server runs in an infinite loop that has a switch condition according to the state of the server.
 This takes place on the class ServerThread, which implements the following state machine [ADD HERE!].
