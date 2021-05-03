@@ -44,16 +44,37 @@
 
 ## About The Project
 
-This project aims to explain what RAFT is about, describe a possible implementation using Java, provide real data regarding the usage of 3, 5 and 7 servers and discuss its performance corcerning the obtained results.
-Furthermore, the implementation's source code is also available.
+This project aims to :
 
-## RAFT Overview
+* Explain what RAFT is about
+* Describe its implementation using Java
+* Provide real data regarding the usage of 3, 5 and 7 servers
+* Discuss its performance
 
-In Raft, each server can be, at a given time, in one of three states: leader, candidate or follower. Raft works by having one distinguished leader. This leader is responsible for receiving the commands from the client and to manage the replicated log by replicating this command onto the others.
+Furthermore, the implementation's source code is provided.
 
-Another important aspect is the concept of ”term”: a term is an interval of time that starts with an election. If a leader is elected, then that server will be leader for that term. If no server wins the election, i.e. no leader is elected, then that term will finish with the starting of a new election.
+## Raft Overview
 
-Each server saves its own CurrentTerm. The server increases the CurrrentTerm monotonically and the servers communicate this in the messages it sends. If a server realises there is a term greater than his, it updates its own; this server, whether a leader or a candidate, then immediately becomes a follower.
+In Raft, each server can be, at a given time, in one of three states:
+
+* Leader
+* Candidate
+* Follower
+
+Raft works by having one distinguished leader.
+This leader is responsible for:
+
+* Receiving the commands from the client
+* Managing the log replication
+
+An important aspect is the concept of **term**.
+A term is an interval of time that starts with an election.
+If a leader is elected, then that server will be leader for that term.
+If no server wins the election, i.e. no leader is elected, then that term will finish with the starting of a new election.
+
+Each server saves its own current term, *CurrentTerm*, increasing its value monotonically and communicating it in each message it sends.
+If a server realizes that there's a server with a current term greater than his, it updates its own to the greatest current term found.
+By doing that, the server, whether a leader or a candidate, immediately becomes a follower.
 
 ### Leader Election
 
