@@ -1,9 +1,9 @@
 <br />
 <p align="center">
   <a href="https://github.com/araragao/raft/tree/main/pictures">
-    <img src="pictures/raft-logo.png" alt="Logo">
+    <img src="pictures/raft-logo.png" alt="Logo" height="300" width="300">
   </a>
-  <h3 align="center">Raft Consensus Algorithm</h3>
+  <h1 align="center">Raft Consensus Algorithm</h1>
   <h2 align="center">Analysis and Implementation</h2>
   <p align="center">Protocol overview, implementation and performance analysis</p>
 </p>
