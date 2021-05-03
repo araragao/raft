@@ -46,7 +46,7 @@
 
 This project aims to :
 
-* Explain what RAFT is about
+* Explain what **Raft** is about
 * Describe its implementation using Java
 * Provide real data regarding the usage of 3, 5 and 7 servers
 * Discuss its performance
