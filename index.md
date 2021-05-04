@@ -316,6 +316,18 @@ The values were taken from various amounts of servers (3, 5 and 7) and for 6 dif
 
 The latency measures the time interval between the leader receiving a command from the client and the instant in which the client sends the response to that command.
 
+<p align="center">
+  <img src="pictures/graphics/latency-3-servers.png"  width="65%" alt="slatency-3-servers">
+</p>
+
+<p align="center">
+  <img src="pictures/graphics/latency-5-servers.png"  width="65%" alt="latency-5-servers">
+</p>
+
+<p align="center">
+  <img src="pictures/graphics/latency-7-servers.png"  width="65%" alt="latency-7-servers">
+</p>
+
 When evaluating the results, it is clear that the latency increases with the percentage of error and number of servers.
 
 When we focus on the simulation that has 7 servers and 50% of error, it is noticeable that after every glitch there is a linear decrease.
@@ -326,6 +338,10 @@ Multiple requests can be pending since the client sends a new command after rece
 
 The election time measures the time interval between a certain follower becoming candidate and the time instant in which it stops being a candidate.
 This is done either by turning into a leader or into a follower again, as they both mean another leader is recognised.
+
+<p align="center">
+  <img src="pictures/graphics/election-time.png"  width="65%" alt="election-time">
+</p>
 
 As expected, the election time grows with both the number of servers and the percentage of error.
 The main factor for this behaviour is that more followers will turn into candidates with the increase of the error which results in many parallel RequestVote RPCs sent in parallel.
