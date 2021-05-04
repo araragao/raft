@@ -115,8 +115,8 @@ This leader is responsible for:
 
 An important aspect is the concept of **term**.
 A term is an interval of time that starts with an election.
-If a leader is elected, then that server will be leader for that term.
-If no server wins the election, i.e. no leader is elected, then that term will finish with the starting of a new election.
+If a leader is elected, then that server will be the leader for that term.
+If no server wins the election, *i.e.* no leader is elected, then that term will finish with the starting of a new election.
 
 Each server saves its own current term, *CurrentTerm*, increasing its value monotonically and communicating it in each message it sends.
 If a server realizes that there's a server with a current term greater than his, it updates its own to the greatest current term found.
@@ -126,8 +126,8 @@ By doing that, the server, whether a leader or a candidate, immediately becomes 
 
 Raft is based on two **remote procedure calls**, refered from now on as *RPCs*:
 * *AppendEntries RPC* which is initiated by the leader periodically.
-It replicates log entries, if there are any to be replicated, and provides a form of heartbeat.
-* *RequestVote RPC* which is iniated by a follower to start an election
+It replicates the log entries, if there are any to be replicated, and provides a form of heartbeat.
+* *RequestVote RPC* which is initiated by a follower to start an election.
 
 If a follower does not receive any heartbeat, after a certain time, known as *election timeout*, it starts an election.
 To do so, it increments its own term and becomes a candidate.
@@ -148,7 +148,7 @@ In the next *AppendEntries RPCs*, it replicates it.
 
 Each *entry* contains the respective command, the term in which it was received, and an index that identifies its position in the log.
 These are used to make a consistency check: when sending an *AppendEntries RPC*, the leader sends the index and the term of the entry in its log that precedes the new entries that it is sending. 
-The follower will try to find on its log the respective entry, and if it does, it means the log of the follower is updated.
+The follower will try to find on its own log the respective entry, and if it does, it means the log of the follower is updated.
 Otherwise, it refuses the new entries.
 When the logs are inconsistent, the leader forces the followers’ logs to duplicate its own, as will be explained further.
 
@@ -158,7 +158,7 @@ When the logs are inconsistent, the leader forces the followers’ logs to dupli
 
 ### State Machine
 
-The leader decides when is it safe to apply a specific command to the state machines, i.e. to commit a specific entry.
+The leader decides when is it safe to apply a specific command to the state machines, *i.e.* to commit a specific entry.
 It commits a certain *entry* after replicating it on the majority of the servers.
 When doing this, it also commits all preceding entries in its log.
 The *AppendEntries RPC* also contains the *commitIndex*, which corresponds to the last commited index.
@@ -177,7 +177,7 @@ For further clarification, a class diagram is provided.
 Each server makes use of a *MulticastCommunicationPackage* and a *UnicastCommunicationPackage* that implement communication services .
 As a consequence, all servers support multicast and unicast communication.
 
-All communications occur over UDP and the network was implemented using threads.
+All communications occur over UDP and server nodes are thread-based.
 Even though all server nodes are running on the same machine, all communication happens through messages, with no use of shared memory.
 Due to the lack of reliability of UDP, the application might have to deal with loss of packets, delays and different orders of arrival.
 
