@@ -54,6 +54,8 @@ Furthermore, the implementation's source code is provided.
   </div> 
 </div>
 
+   (click on the pictures to check our Linkedin profiles!)
+
 ## Table of Contents
 
 <details open="open">
