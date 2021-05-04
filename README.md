@@ -12,7 +12,7 @@ The objective of this work is to implement a consensus algorithm called Raft. Th
 
 The following work was based on the article written by Diego Ongaro and John Ousterhout which is accessible in [Raft](https://github.com/araragao/raft/blob/main/01-paper/raft-paper.pdf). In addition to this, the results and comments to the understanding of the algorithm are described in the report  [raft-understandable-distributed-consensus.pdf](https://github.com/araragao/raft/blob/main/01-paper/raft-understandable-distributed-consensus.pdf).
 
-In the context of this implementation, a [github website](https://araragao.github.io/raft/] was developed. This aims to support the written paper by revewing topics such as raf overview, implementation, results and performance anaysis, and so on.
+In the context of this implementation, a [github website](https://araragao.github.io/raft/) was developed. This aims to support the written paper by revewing topics such as raf overview, implementation, results and performance anaysis, and so on.
 
 ## Raft Overview <a name="raft"></a>
 
