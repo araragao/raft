@@ -13,41 +13,43 @@ Furthermore, the implementation's source code is provided.
 
 #### The team
 
-<div align="center">
-  <div style="display: flex; align-items: flex-start;">
-    <div class="team-member">
-      <div style="margin: 10px">
-        <div class="photo">
-          <a href="https://www.linkedin.com/in/andreribeiroaragao/">
-            <img align="left" src="pictures/aa-avatar.png" alt="aa-avatar" width="100" height="100">
-          </a>
-        </div>
-        <div class="name">
-          André
-        </div>
-      </div>
-    </div>
-    <div class="team-member">
-      <div style="margin: 10px">
-        <div class="photo">
-          <a href="https://www.linkedin.com/in/andre-matos98/">
-            <img align="left" src="pictures/am-avatar.png" alt="am-avatar" width="100" height="100">
-          </a>
-        </div>
-        <div class="name">
-          André
+<div>
+  <div align="center">
+    <div style="display: flex; align-items: flex-start;">
+      <div class="team-member">
+        <div style="margin: 10px">
+          <div class="photo">
+            <a href="https://www.linkedin.com/in/andreribeiroaragao/">
+              <img align="left" src="pictures/aa-avatar.png" alt="aa-avatar" width="100" height="100">
+            </a>
+          </div>
+          <div class="name">
+            André
+          </div>
         </div>
       </div>
-    </div>
-    <div class="team-member">
-      <div style="margin: 10px">
-        <div class="photo">
-          <a href="https://www.linkedin.com/in/margarida-marques-b65618162/">
-            <img align="left" src="pictures/mm-avatar.png" alt="mm-avatar" width="100" height="100">
-          </a>
+      <div class="team-member">
+        <div style="margin: 10px">
+          <div class="photo">
+            <a href="https://www.linkedin.com/in/andre-matos98/">
+              <img align="left" src="pictures/am-avatar.png" alt="am-avatar" width="100" height="100">
+            </a>
+          </div>
+          <div class="name">
+            André
+          </div>
         </div>
-        <div class="name">
-          Margarida
+      </div>
+      <div class="team-member">
+        <div style="margin: 10px">
+          <div class="photo">
+            <a href="https://www.linkedin.com/in/margarida-marques-b65618162/">
+              <img align="left" src="pictures/mm-avatar.png" alt="mm-avatar" width="100" height="100">
+            </a>
+          </div>
+          <div class="name">
+            Margarida
+          </div>
         </div>
       </div>
     </div>
