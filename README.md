@@ -6,7 +6,7 @@ André Aragão, André Matos, Margarida Marques
 - [Raft Overview](#raft)
 - [Executables](#exe)
 - [Code Overview](#code)
-- [Github Structure](#stru)
+- [GitHub Structure](#stru)
 
 ## Objective <a name="objective"></a>
 The objective of this work is to implement a consensus algorithm called Raft. This algorithm is implemented entirely in java. Furthermore, a final goal is to compare the suggested raft implementation with other consensus algorithms such as the Paxos algorithm. 
@@ -29,9 +29,9 @@ There are some variables that can be changed by changing the values passed to th
 Finally, it is also possible to change the timeout for the client to wait for the response from the system.
 With regards the code files, these can be found in [src](https://github.com/araragao/raft/tree/main/03-executable-files).
 
-## Github Structure <a name="stru"></a>
+## GitHub Structure <a name="stru"></a>
 
-This github repository is divided in 4 different folders and it gives support to a developed website.
+This GitHub repository is divided in 4 different folders and it gives support to a developed website.
 
 * [01-paper](https://github.com/araragao/raft/tree/main/01-paper) - contains the original report which this work is based on. A personal algorithm overview and performance analysis report can be found in this folder.
 * [02-source-code](https://github.com/araragao/raft/tree/main/02-source-code) - contains the source code of this project as well as every developed class.
