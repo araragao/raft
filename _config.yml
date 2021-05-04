@@ -1,4 +1,4 @@
 theme: jekyll-theme-cayman
-title: [Raft - Overview, implementation and performance analysis]
-description: [Interactive paper that explored Raft consensus protocol]
+title: Raft - Overview, implementation and performance analysis
+description: Interactive paper that explored Raft consensus protocol
 show_downloads: ["true"]
