@@ -2,8 +2,3 @@ theme: jekyll-theme-cayman
 title: [Raft - Overview, implementation and performance analysis]
 description: [Interactive paper that explored Raft consensus protocol]
 show_downloads: ["true"]
-
-github:
-  exe_url: https://github.com/araragao/raft/blob/main/executable-files.zip?raw=true
-  source_url: https://github.com/araragao/raft/blob/main/source-code.zip?raw=true
-  paper_url: https://github.com/araragao/raft/blob/main/paper/raft-paper.pdf
