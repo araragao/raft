@@ -54,8 +54,9 @@ Furthermore, the implementation's source code is provided.
       </div>
     </div>
   </div>
-  <span style="display:inline-block"></span><sub><sup>Click on the pictures to check our Linkedin profiles</sup></sub>
 </div>
+
+<span style="display:inline-block"></span><sub><sup>Click on the pictures to check our Linkedin profiles</sup></sub>
 
 ## Table of Contents
 
