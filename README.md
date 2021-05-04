@@ -1,6 +1,6 @@
 # Raft: Understandable Distributed Consensus
 
-André Aragão, André Matos, Margarida Marques
+[André Aragão](https://www.linkedin.com/in/andreribeiroaragao/), [André Matos](https://www.linkedin.com/in/andre-matos98/), [Margarida Marques](https://www.linkedin.com/in/margarida-marques-b65618162/)
 
 - [Objective](#objective)
 - [Raft Overview](#raft)
