@@ -54,7 +54,7 @@ Furthermore, the implementation's source code is provided.
   </div> 
 </div>
 
-   (click on the pictures to check our Linkedin profiles!)
+<sub><sup>(click on the pictures to check our Linkedin profiles!)</sup></sub>
 
 ## Table of Contents
 
