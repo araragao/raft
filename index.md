@@ -352,6 +352,10 @@ Adding the loss of messages that create more candidates and the loss of messages
 The convergence time is the time needed for the state machines of the servers to be consistent.
 It starts when the current leader commits a certain entry (with a specific index), and it ends when the last server commits that same entry.
 
+<p align="center">
+  <img src="pictures/graphics/delay-to-consensus-7-servers-all-error.png"  width="65%" alt="delay-to-consensus-7-servers-all-error">
+</p>
+
 The delay to consensus does not change much when comparing a different number of servers.
 Thus, the graphic available is only for the case where there are 3 servers.
 However, for different amounts of error, the results are distinct.
@@ -361,6 +365,22 @@ This happens when the leader receives a majority of positive acknowledges (for i
 However, the other 2 followers will need log replication, which will lead to a clear delay on reaching the consensus.
 
 The network traffic measures the number of messages exchanged during nodes since the moment in which the leader receives the command from the client until all servers have applied that command to their state machine.
+
+<p align="center">
+  <img src="pictures/graphics/network-traffic-to-consensus-3-servers.png"  width="65%" alt="network-traffic-to-consensus-3-servers">
+</p>
+
+<p align="center">
+  <img src="pictures/graphics/network-traffic-to-consensus-5-servers.png"  width="65%" alt="network-traffic-to-consensus-5-servers">
+</p>
+
+<p align="center">
+  <img src="pictures/graphics/network-traffic-to-consensus-7-servers.png"  width="65%" alt="network-traffic-to-consensus-7-servers">
+</p>
+
+<p align="center">
+  <img src="pictures/graphics/network-traffic-to-consensus-5-servers-all-error.png"  width="65%" alt="network-traffic-to-consensus-5-servers-all-error">
+</p>
 
 It is relevant to note that, for low error percentages, the whole graphic shifts to a higher number of messages when the servers increase.
 In the example with 3 servers and no error, the leader has to receive two acknowledge messages and each server receives one *AppendEntries RPC*.
