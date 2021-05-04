@@ -4,6 +4,6 @@ description: [Interactive paper that explored Raft consensus protocol]
 show_downloads: ["true"]
 
 github:
-  exe_url: https://github.com/araragao/raft/raw/main/executable-files.zip
-  source_url: https://github.com/araragao/raft/blob/319370d8eda43dc0fead8409e574104d7f4f1959/source-code.zip
+  exe_url: https://github.com/araragao/raft/blob/main/executable-files.zip?raw=true
+  source_url: https://github.com/araragao/raft/blob/main/source-code.zip?raw=true
   paper_url: https://github.com/araragao/raft/blob/main/paper/raft-paper.pdf
