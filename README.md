@@ -6,6 +6,7 @@ André Aragão, André Matos, Margarida Marques
 - [Raft Overview](#raft)
 - [Executables](#exe)
 - [Code Overview](#code)
+- [Github Structure](#stru)
 
 ## Objective <a name="objective"></a>
 The objective of this work is to implement a consensus algorithm called Raft. This algorithm is implemented entirely in java. Furthermore, a final goal is to compare the suggested raft implementation with other consensus algorithms such as the Paxos algorithm. 
@@ -27,3 +28,12 @@ When running, it is possible to see the GUIs for all the servers, as well as the
 There are some variables that can be changed by changing the values passed to the functions in the main file. These are the communication ports for the servers and the port for multicast communication. Other values that can be changed are the maximum and minimum values for the operands in the commands sent by the client. 
 Finally, it is also possible to change the timeout for the client to wait for the response from the system.
 With regards the code files, these can be found in [src](https://github.com/araragao/raft/tree/main/03-executable-files).
+
+## Github Structure <a name="stru"></a>
+
+This github repository is divided in 4 different folders and it gives support to a developed website.
+
+* [01-paper](https://github.com/araragao/raft/tree/main/01-paper) - contains the original report which this work is based on. A personal algorithm overview and performance analysis report can be found in this folder.
+* [02-source-code](https://github.com/araragao/raft/tree/main/02-source-code) - contains the source code of this project as well as every developed class.
+* [03-executable-file](https://github.com/araragao/raft/tree/main/03-executable-files) - contains a set of executable files of the source code with different settings. These settings differ in number of servers, client response, and percentage of message lost.
+* [04-downloads](https://github.com/araragao/raft/tree/main/04-downloads) - this folder has zip files to the source code and to the executable files.
