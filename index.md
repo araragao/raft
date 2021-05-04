@@ -91,10 +91,6 @@ Furthermore, the implementation's source code is provided.
   </ol>
 </details>
 
-## Annexes
-
-### Complete Class Diagram
-
 ## Raft Overview
 
 In Raft, each server can be, at a given time, in one of three states:
